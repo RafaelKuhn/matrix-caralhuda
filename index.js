@@ -1,5 +1,46 @@
 
-// alert("deu certo")
+
+/*
+
+a(`
+1 ,   0  ,   0   ,
+0 , cos_x, -sin_x,
+0 , sin_x,  cos_x,
+`)
+
+b(`
+cos_y , 0, sin_y,
+   0  , 1,   0  ,
+-sin_y, 0, cos_y,
+`)
+
+
+XY
+a(`
+    cos_y    ,    0  ,     sin_y    ,  
+-sin_x*-sin_y,  cos_x,  -sin_x*cos_y,  
+cos_x*-sin_y ,  sin_x,  cos_x*cos_y ,  
+`)
+
+b(`
+cos_z , -sin_z, 0,
+sin_z ,  cosz , 0,
+   0  ,    0  , 1,
+`)
+
+
+XYZ
+a(`
+           cos_y*cos_z           ,            cos_y*-sin_z           ,     sin_y    ,  
+-sin_x*-sin_y*cos_z + cos_x*sin_z,  -sin_x*-sin_y*-sin_z + cos_x*cosz,  -sin_x*cos_y,  
+cos_x*-sin_y*cos_z + sin_x*sin_z ,  cos_x*-sin_y*-sin_z + sin_x*cosz ,  cos_x*cos_y ,  
+`)
+
+
+*/
+
+
+console.log("input functions: 'fromInputA' and 'fromInputB'")
 
 const A00 = document.getElementById("A00");  const A10 = document.getElementById("A10");  const A20 = document.getElementById("A20");  const A30 = document.getElementById("A30");
 const A01 = document.getElementById("A01");  const A11 = document.getElementById("A11");  const A21 = document.getElementById("A21");  const A31 = document.getElementById("A31");
@@ -156,35 +197,35 @@ document.getElementById("faz").onclick = () => {
 	let out = "";
 
 	const mode = document.getElementById("type").value
-	let sz = 4;
+	let szy = 4;
+	let szx = 4;
 	if (mode === "3x3") {
-		sz = 3;
+		szx = 3;
+		szy = 3;
 	} else if (mode === "3x1") {
-
-		outEl.value = "não fiz ainda";
-		return;
+		szx = 1;
+		szy = 3;
 	} else if (mode === "4x1") {
-
-		outEl.value = "também não fiz ainda";
-		return
+		szx = 1;
+		szy = 4;
 	}
 
 	const keep0 = document.getElementById("keep0").checked;
 
-	for (let i = 0; i < sz; ++i) {
-		for (let j = 0; j < sz; ++j) {
-			for (let k = 0; k < sz; ++k) {
+	for (let i = 0; i < szx; ++i) {
+		for (let j = 0; j < szy; ++j) {
+			for (let k = 0; k < szy; ++k) {
+
+				// debugar os index
+				// console.log(`[${j},${i}]  += A[${j},${k}] * B[${k},${i}] `);
 
 				if (!keep0 && arrA[j][k].trim() === "0" || arrB[k][i].trim() === "0")  {
-					// let str = " ".repeat(arrA[j][k].length + arrB[k][i].length);
-					// str = str.slice(0, str.length / 2) + "0" + str.slice(str.length / 2);
-					// arrC[j][i] += str;
 					arrC[j][i] += "0";
 				} else {
 					arrC[j][i] += `${arrA[j][k]}*${arrB[k][i]}`
 				}
 
-				if ( k != sz-1 )
+				if ( k != szy-1 )
 					arrC[j][i] += " + "
 				// else if ( i != sz-1 )
 				// 	arrC[j][i] += ",   "
@@ -195,12 +236,13 @@ document.getElementById("faz").onclick = () => {
 
 
 	// FILTERS
-	
-	const keep0plus = document.getElementById("keep02").checked;
-	if (!keep0plus) {
 
-		for (let x = 0; x < sz; ++x) {
-			for (let y = 0; y < sz; ++y) {
+	const keep0PlusSmth = document.getElementById("keep02").checked;
+	if (!keep0PlusSmth) {
+
+		// X e Y TÃO INVERTIDO MERDA!!!
+		for (let x = 0; x < szy; ++x) {
+			for (let y = 0; y < szy; ++y) {
 
 				let need = "0 + ";
 				let ct = 10;
@@ -234,14 +276,15 @@ document.getElementById("faz").onclick = () => {
 	}
 
 	// console.log(" ######################## KEEP 1")
-	const keep1 = document.getElementById("keep1").checked;
-	if (!keep1) {
+	const keep1TimesSmth = document.getElementById("keep1").checked;
+	if (!keep1TimesSmth) {
 
-		for (let x = 0; x < sz; ++x) {
-			for (let y = 0; y < sz; ++y) {
+		// X e Y TÃO INVERTIDO MERDA!!!
+		for (let x = 0; x < szy; ++x) {
+			for (let y = 0; y < szy; ++y) {
 
-				console.log(`[${arrC[x][y]}] contains ? ${arrC[x][y].includes("1*")}`);
-				console.log(`[${arrC[x][y]}] contains ? ${arrC[x][y].includes("*1")}`);
+				// console.log(`[${arrC[x][y]}] contains ? ${arrC[x][y].includes("1*")}`);
+				// console.log(`[${arrC[x][y]}] contains ? ${arrC[x][y].includes("*1")}`);
 
 				let need = "1*";
 				let ct = 10;
@@ -257,6 +300,8 @@ document.getElementById("faz").onclick = () => {
 					ct -= 1;
 					if (ct === 0) throw "BOSTA LOOP INFINITO"
 				}
+
+				// acho que num precisa disso
 
 				// while (arrC[x][y].includes("+ 0 +")) {
 				// 	arrC[x][y] = arrC[x][y].replace("+ 0 +", "+");
@@ -274,11 +319,11 @@ document.getElementById("faz").onclick = () => {
 
 
 	const ySize = []
-	for (let i = 0; i < sz; ++i) ySize[i] = 0;
+	for (let i = 0; i < szy; ++i) ySize[i] = 0;
 
-	for (let x = 0; x < sz; ++x) {
+	for (let x = 0; x < szy; ++x) {
 		let maxY = arrC[0][x].length;
-		for (let y = 0; y < sz; ++y) {
+		for (let y = 0; y < szy; ++y) {
 			if (arrC[y][x].length > maxY) maxY = arrC[y][x].length;
 			// console.log(`[${arrC[y][x]}]: ${arrC[y][x].length}`);
 		}
@@ -288,8 +333,8 @@ document.getElementById("faz").onclick = () => {
 	// console.log(ySize);
 
 
-	for (let x = 0; x < sz; ++x) {
-		for (let y = 0; y < sz; ++y) {
+	for (let x = 0; x < szy; ++x) {
+		for (let y = 0; y < szx; ++y) {
 			let maxLen = ySize[y];
 			// console.log(`out [${arrC[y][x]}]`);
 			// out += arrC[x][y].padStart(maxLen/2);
@@ -316,6 +361,157 @@ document.getElementById("faz").onclick = () => {
 	outEl.value = out;
 }
 
+
+const a = input => {
+	let split = input.replaceAll("\n", "").split(",");
+
+	// ignore last one
+	for (let i = 0; i < split.length - 1; i++) {
+		split[i] = split[i].trim();
+	}
+
+
+	if (split.length == 17) {
+		console.log(`4x4`);
+		fillAWith(`4x4`, split);
+		return;
+	}
+
+	if (split.length == 10) {
+		console.log(`3x3`);
+		fillAWith(`3x3`, split);
+		return;
+
+	}
+
+	if (split.length == 4) {
+		console.log(`3x1`);
+		fillAWith(`3x1`, split);
+		return;
+	}
+
+	if (split.length == 5) {
+		console.log(`4x1`);
+		fillAWith(`4x1`, split);
+		return;
+	}
+
+	console.error(`Unrecognized, of size ${split.length}`);
+}
+
+const fillAWith = (mode, arr) => {
+
+	let i = 0;
+
+	if (mode === "3x3") {
+		A00.value = arr[i++]; A10.value = arr[i++]; A20.value = arr[i++]; A30.value = "0";
+		A01.value = arr[i++]; A11.value = arr[i++]; A21.value = arr[i++]; A31.value = "0";
+		A02.value = arr[i++]; A12.value = arr[i++]; A22.value = arr[i++]; A32.value = "0";
+		A03.value = "0";      A13.value = "0";      A23.value = "0";      A33.value = "1";
+		return;
+	}
+
+	if (mode === "4x4") {
+		A00.value = arr[i++]; A10.value = arr[i++]; A20.value = arr[i++]; A30.value = arr[i++];
+		A01.value = arr[i++]; A11.value = arr[i++]; A21.value = arr[i++]; A31.value = arr[i++];
+		A02.value = arr[i++]; A12.value = arr[i++]; A22.value = arr[i++]; A32.value = arr[i++];
+		A03.value = arr[i++]; A13.value = arr[i++]; A23.value = arr[i++]; A33.value = arr[i++];
+		return;
+	}
+
+	if (mode === "3x1") {
+		A00.value = arr[i++]; A10.value = arr[i++]; A20.value = arr[i++]; A30.value = "0";
+		A01.value = arr[i++]; A11.value = arr[i++]; A21.value = arr[i++]; A31.value = "0";
+		A02.value = arr[i++]; A12.value = arr[i++]; A22.value = arr[i++]; A32.value = "0";
+		A03.value = "0";      A13.value = "0";      A23.value = "0";      A33.value = "1";
+		return;
+	}
+
+	if (mode === "4x1") {
+		A00.value = arr[i++]; A10.value = arr[i++]; A20.value = arr[i++]; A30.value = "0";
+		A01.value = arr[i++]; A11.value = arr[i++]; A21.value = arr[i++]; A31.value = "0";
+		A02.value = arr[i++]; A12.value = arr[i++]; A22.value = arr[i++]; A32.value = "0";
+		A03.value = "0";      A13.value = "0";      A23.value = "0";      A33.value = "1";
+		return;
+	}
+
+}
+
+
+const b = input => {
+	let split = input.replaceAll("\n", "").split(",");
+
+	// ignore last one
+	for (let i = 0; i < split.length - 1; i++) {
+		split[i] = split[i].trim();
+	}
+
+
+	if (split.length == 17) {
+		console.log(`4x4`);
+		fillBWith(`4x4`, split);
+		return;
+	}
+
+	if (split.length == 10) {
+		console.log(`3x3`);
+		fillBWith(`3x3`, split);
+		return;
+
+	}
+
+	if (split.length == 4) {
+		console.log(`3x1`);
+		fillBWith(`3x1`, split);
+		return;
+	}
+
+	if (split.length == 5) {
+		console.log(`4x1`);
+		fillBWith(`4x1`, split);
+		return;
+	}
+
+	console.error(`Unrecognized, of size ${split.length}`);
+}
+
+const fillBWith = (mode, arr) => {
+
+	let i = 0;
+
+	if (mode === "3x3") {
+		B00.value = arr[i++]; B10.value = arr[i++]; B20.value = arr[i++]; B30.value = "0";
+		B01.value = arr[i++]; B11.value = arr[i++]; B21.value = arr[i++]; B31.value = "0";
+		B02.value = arr[i++]; B12.value = arr[i++]; B22.value = arr[i++]; B32.value = "0";
+		B03.value = "0";      B13.value = "0";      B23.value = "0";      B33.value = "1";
+		return;
+	}
+
+	if (mode === "4x4") {
+		B00.value = arr[i++]; B10.value = arr[i++]; B20.value = arr[i++]; B30.value = arr[i++];
+		B01.value = arr[i++]; B11.value = arr[i++]; B21.value = arr[i++]; B31.value = arr[i++];
+		B02.value = arr[i++]; B12.value = arr[i++]; B22.value = arr[i++]; B32.value = arr[i++];
+		B03.value = arr[i++]; B13.value = arr[i++]; B23.value = arr[i++]; B33.value = arr[i++];
+		return;
+	}
+
+	if (mode === "3x1") {
+		B00.value = arr[i++]; B10.value = "0"; B20.value = "0"; B30.value = "0";
+		B01.value = arr[i++]; B11.value = "1"; B21.value = "0"; B31.value = "0";
+		B02.value = arr[i++]; B12.value = "0"; B22.value = "1"; B32.value = "0";
+		B03.value = "0";      B13.value = "0"; B23.value = "0"; B33.value = "1";
+		return;
+	}
+
+	if (mode === "4x1") {
+		B00.value = arr[i++]; B10.value = "0"; B20.value = "0"; B30.value = "0";
+		B01.value = arr[i++]; B11.value = "1"; B21.value = "0"; B31.value = "0";
+		B02.value = arr[i++]; B12.value = "0"; B22.value = "1"; B32.value = "0";
+		B03.value = arr[i++]; B13.value = "0"; B23.value = "0"; B33.value = "1";
+		return;
+	}
+
+}
 
 
 // const font = document.getElementById("font");
