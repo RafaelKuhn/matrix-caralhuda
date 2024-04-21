@@ -347,7 +347,11 @@ document.getElementById("faz").onclick = () => {
 
 
 			out += str;
-			out += ",  "
+			out += ",";
+
+			// except the last
+			if ( y < (szx-1) )
+				out += "  "
 		}
 		out += "\n"
 	}
