@@ -1,46 +1,41 @@
 
 
-/*
-
-a(`
+console.log("input functions: 'fromInputA' and 'fromInputB'")
+console.log(`
+a(\`
 1 ,   0  ,   0   ,
 0 , cos_x, -sin_x,
 0 , sin_x,  cos_x,
-`)
+\`)
 
-b(`
+b(\`
 cos_y , 0, sin_y,
    0  , 1,   0  ,
 -sin_y, 0, cos_y,
-`)
+\`)
 
 
 XY
-a(`
+a(\`
     cos_y    ,    0  ,     sin_y    ,  
 -sin_x*-sin_y,  cos_x,  -sin_x*cos_y,  
 cos_x*-sin_y ,  sin_x,  cos_x*cos_y ,  
-`)
+\`)
 
-b(`
+b(\`
 cos_z , -sin_z, 0,
-sin_z ,  cosz , 0,
+sin_z ,  cos_z , 0,
    0  ,    0  , 1,
-`)
+\`)
 
 
 XYZ
-a(`
+a(\`
            cos_y*cos_z           ,            cos_y*-sin_z           ,     sin_y    ,  
--sin_x*-sin_y*cos_z + cos_x*sin_z,  -sin_x*-sin_y*-sin_z + cos_x*cosz,  -sin_x*cos_y,  
-cos_x*-sin_y*cos_z + sin_x*sin_z ,  cos_x*-sin_y*-sin_z + sin_x*cosz ,  cos_x*cos_y ,  
+-sin_x*-sin_y*cos_z + cos_x*sin_z,  -sin_x*-sin_y*-sin_z + cos_x*cos_z,  -sin_x*cos_y,  
+cos_x*-sin_y*cos_z + sin_x*sin_z ,  cos_x*-sin_y*-sin_z + sin_x*cos_z ,  cos_x*cos_y ,  
+\`)
 `)
-
-
-*/
-
-
-console.log("input functions: 'fromInputA' and 'fromInputB'")
 
 const A00 = document.getElementById("A00");  const A10 = document.getElementById("A10");  const A20 = document.getElementById("A20");  const A30 = document.getElementById("A30");
 const A01 = document.getElementById("A01");  const A11 = document.getElementById("A11");  const A21 = document.getElementById("A21");  const A31 = document.getElementById("A31");

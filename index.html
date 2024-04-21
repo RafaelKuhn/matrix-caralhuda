@@ -3,11 +3,19 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Matrix mult</title>
+	<title>Matrix Multiply</title>
+	<link rel="icon" href="favicon.png">
 	<style>
 		body {
 			background-color: aquamarine;
 		}
+		
+		#faz {
+			width: 100px;
+			height: 40px;
+			font-size: larger;
+		}
+
 	</style>
 </head>
 <body>
@@ -24,37 +32,35 @@
 	<input type="button" value="indices" id="axb">
 	<br>
 
-	<span id="A00p">A00: </span><input value="1" size="5" id="A00">  <span id="A10p">A10: </span><input value="0" size="5" id="A10">  <span id="A20p">A20: </span><input value="0" size="5" id="A20">  <span id="A30p">A30: </span><input value="0" size="5" id="A30"> <br>
-	<span id="A01p">A01: </span><input value="0" size="5" id="A01">  <span id="A11p">A11: </span><input value="1" size="5" id="A11">  <span id="A21p">A21: </span><input value="0" size="5" id="A21">  <span id="A31p">A31: </span><input value="0" size="5" id="A31"> <br>
-	<span id="A02p">A02: </span><input value="0" size="5" id="A02">  <span id="A12p">A12: </span><input value="0" size="5" id="A12">  <span id="A22p">A22: </span><input value="1" size="5" id="A22">  <span id="A32p">A32: </span><input value="0" size="5" id="A32"> <br>
-	<span id="A03p">A03: </span><input value="0" size="5" id="A03">  <span id="A13p">A13: </span><input value="0" size="5" id="A13">  <span id="A23p">A23: </span><input value="0" size="5" id="A23">  <span id="A33p">A33: </span><input value="1" size="5" id="A33"> <br>
+	<span id="A00p">A00: </span><input value="1" size="10" id="A00">  <span id="A10p">A10: </span><input value="0" size="10" id="A10">  <span id="A20p">A20: </span><input value="0" size="10" id="A20">  <span id="A30p">A30: </span><input value="0" size="10" id="A30"> <br>
+	<span id="A01p">A01: </span><input value="0" size="10" id="A01">  <span id="A11p">A11: </span><input value="1" size="10" id="A11">  <span id="A21p">A21: </span><input value="0" size="10" id="A21">  <span id="A31p">A31: </span><input value="0" size="10" id="A31"> <br>
+	<span id="A02p">A02: </span><input value="0" size="10" id="A02">  <span id="A12p">A12: </span><input value="0" size="10" id="A12">  <span id="A22p">A22: </span><input value="1" size="10" id="A22">  <span id="A32p">A32: </span><input value="0" size="10" id="A32"> <br>
+	<span id="A03p">A03: </span><input value="0" size="10" id="A03">  <span id="A13p">A13: </span><input value="0" size="10" id="A13">  <span id="A23p">A23: </span><input value="0" size="10" id="A23">  <span id="A33p">A33: </span><input value="1" size="10" id="A33"> <br>
 	<br>
 
 	<input type="button" value="identity" id="identity2">
 	<input type="button" value="indices" id="axb2">
 	<br>
-	<span id="B00p">B00: </span><input value="1" size="5" id="B00">  <span id="B10p">B10: </span><input value="0" size="5" id="B10">  <span id="B20p">B20: </span><input value="0" size="5" id="B20">  <span id="B30p">B30: </span><input value="0" size="5" id="B30"> <br>
-	<span id="B01p">B01: </span><input value="0" size="5" id="B01">  <span id="B11p">B11: </span><input value="1" size="5" id="B11">  <span id="B21p">B21: </span><input value="0" size="5" id="B21">  <span id="B31p">B31: </span><input value="0" size="5" id="B31"> <br>
-	<span id="B02p">B02: </span><input value="0" size="5" id="B02">  <span id="B12p">B12: </span><input value="0" size="5" id="B12">  <span id="B22p">B22: </span><input value="1" size="5" id="B22">  <span id="B32p">B32: </span><input value="0" size="5" id="B32"> <br>
-	<span id="B03p">B03: </span><input value="0" size="5" id="B03">  <span id="B13p">B13: </span><input value="0" size="5" id="B13">  <span id="B23p">B23: </span><input value="0" size="5" id="B23">  <span id="B33p">B33: </span><input value="1" size="5" id="B33"> <br>
+	<span id="B00p">B00: </span><input value="1" size="10" id="B00">  <span id="B10p">B10: </span><input value="0" size="10" id="B10">  <span id="B20p">B20: </span><input value="0" size="10" id="B20">  <span id="B30p">B30: </span><input value="0" size="10" id="B30"> <br>
+	<span id="B01p">B01: </span><input value="0" size="10" id="B01">  <span id="B11p">B11: </span><input value="1" size="10" id="B11">  <span id="B21p">B21: </span><input value="0" size="10" id="B21">  <span id="B31p">B31: </span><input value="0" size="10" id="B31"> <br>
+	<span id="B02p">B02: </span><input value="0" size="10" id="B02">  <span id="B12p">B12: </span><input value="0" size="10" id="B12">  <span id="B22p">B22: </span><input value="1" size="10" id="B22">  <span id="B32p">B32: </span><input value="0" size="10" id="B32"> <br>
+	<span id="B03p">B03: </span><input value="0" size="10" id="B03">  <span id="B13p">B13: </span><input value="0" size="10" id="B13">  <span id="B23p">B23: </span><input value="0" size="10" id="B23">  <span id="B33p">B33: </span><input value="1" size="10" id="B33"> <br>
 
 
 	<br>
-	<input id="keep0" type="checkbox"> Manter [algo*]zero[*algo]
+	<input id="keep0" type="checkbox"> Keep [something * ] zero [ * something]
 	<br>
-	<input id="keep02" type="checkbox"> Manter [0 +] algo [+ 0]
+	<input id="keep02" type="checkbox"> Keep [0 +] something [+ 0]
 	<br>
-	<input id="keep1" type="checkbox"> Manter [1*]algo[*1]
+	<input id="keep1" type="checkbox"> Keep [1 * ] something [ * 1]
 	
-	
-	
+	<br>
+	<br>
+	<input type="button" value="Do it" id="faz">
 	<br><br>
 	out:<br>
-	<!-- <input type="range" min="4" max="60" value="50" id="font"><br> -->
 	<textarea style="font-size: 14px; font-family: monospace,monospace;" rows="10" cols="180" id="out"></textarea>
 
-	<br>
-	<input type="button" value="Faz ai" id="faz">
 	
 	<script src="index.js"></script>
 </body>
