@@ -8,12 +8,26 @@
 	<style>
 		body {
 			background-color: aquamarine;
+			font-family: monospace, monospace;
+			
 		}
 		
 		#faz {
 			width: 100px;
 			height: 40px;
 			font-size: larger;
+		}
+
+		code {
+			color: black;
+		}
+
+		.note {
+			font-weight: bold;
+			margin: 0;
+			color: red;
+			position: absolute;
+			bottom: 5px;
 		}
 
 	</style>
@@ -48,18 +62,27 @@
 
 
 	<br>
-	<input id="keep0" type="checkbox"> Keep [something * ] zero [ * something]
+	<input id="keep0" type="checkbox"> Keep [something *] zero [* something]
 	<br>
 	<input id="keep02" type="checkbox"> Keep [0 +] something [+ 0]
 	<br>
-	<input id="keep1" type="checkbox"> Keep [1 * ] something [ * 1]
+	<input id="keep1" type="checkbox"> Keep [1 *] something [* 1]
 	
 	<br>
 	<br>
 	<input type="button" value="Do it" id="faz">
 	<br><br>
 	out:<br>
-	<textarea style="font-size: 14px; font-family: monospace,monospace;" rows="10" cols="180" id="out"></textarea>
+	<textarea style="font-size: 14px;" rows="10" cols="180" id="out"></textarea>
+	
+	<p class="note">
+		Note: this does not perform any math operation at all, it's just string manipulation, it just copy pastes the values where they should be.
+		<br>
+		<br>
+		It won't take into account things like order of operations, if you fill one of the values with a sum, like <code>4+3</code> it's going to end up wrong.
+		<br>
+		Consider putting in your own parenthesis to keep the order of operations, like <code>(4+3)</code>
+	</p>
 
 	
 	<script src="index.js"></script>

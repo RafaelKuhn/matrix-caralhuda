@@ -1,13 +1,15 @@
 
 
-console.log("input functions: 'fromInputA' and 'fromInputB'")
-console.log(`
+console.log(`// to fill the matrices, run the functions:
+
+// around X
 a(\`
 1 ,   0  ,   0   ,
 0 , cos_x, -sin_x,
 0 , sin_x,  cos_x,
 \`)
 
+// around Y
 b(\`
 cos_y , 0, sin_y,
    0  , 1,   0  ,
@@ -15,13 +17,14 @@ cos_y , 0, sin_y,
 \`)
 
 
-XY
+// around XY
 a(\`
     cos_y    ,    0  ,     sin_y    ,  
 -sin_x*-sin_y,  cos_x,  -sin_x*cos_y,  
 cos_x*-sin_y ,  sin_x,  cos_x*cos_y ,  
 \`)
 
+// around Z
 b(\`
 cos_z , -sin_z, 0,
 sin_z ,  cos_z , 0,
@@ -29,7 +32,7 @@ sin_z ,  cos_z , 0,
 \`)
 
 
-XYZ
+// around XYZ
 a(\`
            cos_y*cos_z           ,            cos_y*-sin_z           ,     sin_y    ,  
 -sin_x*-sin_y*cos_z + cos_x*sin_z,  -sin_x*-sin_y*-sin_z + cos_x*cos_z,  -sin_x*cos_y,  
