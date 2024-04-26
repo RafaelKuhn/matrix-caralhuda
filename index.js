@@ -141,10 +141,10 @@ typeEl.onchange = () => {
 	}
 
 	if (mode === "4x1") {
-		 enable(A00, A00p);  enable(A10, A10p);  enable(A20, A20p); disable(A30, A30p);
-		 enable(A01, A01p);  enable(A11, A11p);  enable(A21, A21p); disable(A31, A31p);
-		 enable(A02, A02p);  enable(A12, A12p);  enable(A22, A22p); disable(A32, A32p);
-		disable(A03, A03p); disable(A13, A13p); disable(A23, A23p); disable(A33, A33p);
+		 enable(A00, A00p);  enable(A10, A10p);  enable(A20, A20p); enable(A30, A30p);
+		 enable(A01, A01p);  enable(A11, A11p);  enable(A21, A21p); enable(A31, A31p);
+		 enable(A02, A02p);  enable(A12, A12p);  enable(A22, A22p); enable(A32, A32p);
+		 enable(A03, A03p); enable(A13, A13p); enable(A23, A23p); enable(A33, A33p);
 
 		 enable(B00, B00p); disable(B10, B10p); disable(B20, B20p); disable(B30, B30p);
 		 enable(B01, B01p); disable(B11, B11p); disable(B21, B21p); disable(B31, B31p);
@@ -357,7 +357,7 @@ document.getElementById("faz").onclick = () => {
 	}
 
 
-	outEl.value = out;
+	outEl.value = out.trimEnd("\n");
 }
 
 
