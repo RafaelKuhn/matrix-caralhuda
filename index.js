@@ -217,16 +217,25 @@ document.getElementById("faz").onclick = () => {
 				// debugar os index
 				// console.log(`[${j},${i}]  += A[${j},${k}] * B[${k},${i}] `);
 
-				if (!keep0 && arrA[j][k].trim() === "0" || arrB[k][i].trim() === "0")  {
-					arrC[j][i] += "0";
+				if (!keep0 && (arrA[j][k].trim() === "0" || arrB[k][i].trim() === "0")) {
+						arrC[j][i] += "0";
 				} else {
 					arrC[j][i] += `${arrA[j][k]}*${arrB[k][i]}`
 				}
 
+				// if (keep0) {
+				// 	arrC[j][i] += `${arrA[j][k]}*${arrB[k][i]}`
+				// } else {
+				// 	const anyContainZeros = arrA[j][k].trim() === "0" || arrB[k][i].trim() === "0";
+				// 	if (anyContainZeros)  {
+				// 		arrC[j][i] += "0";
+				// 	} else {
+				// 		arrC[j][i] += `${arrA[j][k]}*${arrB[k][i]}`
+				// 	}
+				// }
+
 				if ( k != szy-1 )
 					arrC[j][i] += " + "
-				// else if ( i != sz-1 )
-				// 	arrC[j][i] += ",   "
 			}
 
 		}
